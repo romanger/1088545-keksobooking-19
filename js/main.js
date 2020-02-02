@@ -60,7 +60,7 @@ var getRandomArray = function (thisArray) {
     randomArray[i] = thisArray[i];
   }
   return randomArray;
-}
+};
 
 var createDataArray = function () {
   var objectsNumber = 8;
