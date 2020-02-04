@@ -45,7 +45,6 @@ var map = document.querySelector('.map');
 var mapFilters = map.querySelector('.map__filters');
 var adForm = document.querySelector('.ad-form');
 var mapWidth = map.offsetWidth;
-var mapHeight = map.offsetHeight;
 var pinMain = map.querySelector('.map__pin--main');
 var mapPinsArea = map.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
