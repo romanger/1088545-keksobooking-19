@@ -1,5 +1,8 @@
 'use strict';
 
+var MOUSE_KEY = 0;
+var ENTER_KEY = 'Enter';
+
 var LOCATION_MAX = 630;
 var LOCATION_MIN = 130;
 var MIN_PRICE = 300;
@@ -13,6 +16,8 @@ var PIN_PARAMS = {
   'width': 50,
   'height': 70
 };
+
+var MAIN_PIN_HEIGHT = 84;
 
 var OFFER_TITLES = [
   'Лучшая Квартира В Токио Только летом',
@@ -37,7 +42,12 @@ var PHOTOS = [
 ];
 
 var map = document.querySelector('.map');
+var mapFilters = map.querySelector('.map__filters');
+var adForm = document.querySelector('.ad-form');
+var guests = adForm.querySelector('#capacity');
+var rooms = adForm.querySelector('#room_number');
 var mapWidth = map.offsetWidth;
+var pinMain = map.querySelector('.map__pin--main');
 var mapPinsArea = map.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
@@ -95,6 +105,40 @@ var createDataArray = function () {
   return adsArray;
 };
 
+var getAddress = function (status) {
+  var locationPinX = pinMain.offsetWidth / 2;
+  var locationPinY = pinMain.offsetHeight / 2;
+  if (status === 'active') {
+    locationPinY = MAIN_PIN_HEIGHT;
+  }
+  var locationX = pinMain.offsetLeft + locationPinX;
+  var locationY = pinMain.offsetTop + locationPinY;
+
+  var startAddress = locationX + ', ' + locationY;
+  adForm.querySelector('#address').value = startAddress;
+};
+
+var toggleFormFieldsStatus = function (form) {
+  var elements = form.children;
+  for (var i = 0; i < elements.length; i++) {
+    if ((elements[i].tagName === 'FIELDSET' || elements[i].tagName === 'SELECT') && elements[i].disabled === false) {
+      elements[i].disabled = true;
+    } else {
+      elements[i].disabled = false;
+    }
+  }
+};
+
+var pageActivate = function () {
+  map.classList.remove('map--faded');
+  adForm.classList.remove('ad-form--disabled');
+  toggleFormFieldsStatus(adForm);
+  toggleFormFieldsStatus(mapFilters);
+  getAddress('active');
+  fillTheMap(offers, pinTemplate, mapPinsArea);
+  initFormValidation();
+};
+
 var addPin = function (obj, node) {
   var img = node.querySelector('img');
   img.src = obj.author.avatar;
@@ -116,7 +160,46 @@ var fillTheMap = function (arr, template, destination) {
   destination.appendChild(fragment);
 };
 
-var offers = createDataArray();
-map.classList.remove('map--faded');
+var guestRoomValidate = function () {
+  if (+rooms.value < +guests.value && +guests.value !== 0) {
+    guests.setCustomValidity('Для всех гостей не хватит комнат');
+    return;
+  } else if (+rooms.value === 100 && +guests.value !== 0) {
+    guests.setCustomValidity('Эти апартаменты не для гостей');
+    return;
+  } else if (+rooms.value !== 100 && +guests.value === 0) {
+    guests.setCustomValidity('Эти апартаменты для гостей');
+    return;
+  }
+  guests.setCustomValidity('');
+};
 
-fillTheMap(offers, pinTemplate, mapPinsArea);
+var initFormValidation = function () {
+  guestRoomValidate();
+};
+
+var offers = createDataArray();
+
+toggleFormFieldsStatus(adForm);
+toggleFormFieldsStatus(mapFilters);
+getAddress();
+
+pinMain.addEventListener('mousedown', function (evt) {
+  if (evt.button === MOUSE_KEY) {
+    pageActivate();
+  }
+});
+
+pinMain.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    pageActivate();
+  }
+});
+
+guests.addEventListener('change', function () {
+  guestRoomValidate();
+});
+
+rooms.addEventListener('change', function () {
+  guestRoomValidate();
+});
