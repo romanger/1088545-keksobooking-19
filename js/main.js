@@ -44,6 +44,8 @@ var PHOTOS = [
 var map = document.querySelector('.map');
 var mapFilters = map.querySelector('.map__filters');
 var adForm = document.querySelector('.ad-form');
+var guests = adForm.querySelector('#capacity');
+var rooms = adForm.querySelector('#room_number');
 var mapWidth = map.offsetWidth;
 var pinMain = map.querySelector('.map__pin--main');
 var mapPinsArea = map.querySelector('.map__pins');
@@ -116,15 +118,13 @@ var getAddress = function (status) {
   adForm.querySelector('#address').value = startAddress;
 };
 
-var toggleFormFieldsStatus = function (form, status) {
+var toggleFormFieldsStatus = function (form) {
   var elements = form.children;
-  var flag = true;
-  if (status === 'enable') {
-    flag = false;
-  }
   for (var i = 0; i < elements.length; i++) {
-    if (elements[i].tagName === 'FIELDSET' || elements[i].tagName === 'SELECT') {
-      elements[i].disabled = flag;
+    if ((elements[i].tagName === 'FIELDSET' || elements[i].tagName === 'SELECT') && elements[i].disabled === false) {
+      elements[i].disabled = true;
+    } else {
+      elements[i].disabled = false;
     }
   }
 };
@@ -132,10 +132,11 @@ var toggleFormFieldsStatus = function (form, status) {
 var pageActivate = function () {
   map.classList.remove('map--faded');
   adForm.classList.remove('ad-form--disabled');
-  toggleFormFieldsStatus(adForm, 'enable');
-  toggleFormFieldsStatus(mapFilters, 'enable');
+  toggleFormFieldsStatus(adForm);
+  toggleFormFieldsStatus(mapFilters);
   getAddress('active');
   fillTheMap(offers, pinTemplate, mapPinsArea);
+  initFormValidation();
 };
 
 var addPin = function (obj, node) {
@@ -160,23 +161,27 @@ var fillTheMap = function (arr, template, destination) {
 };
 
 var guestRoomValidate = function () {
-  var guests = adForm.querySelector('#capacity');
-  var rooms = adForm.querySelector('#room_number');
-
   if (+rooms.value < +guests.value && +guests.value !== 0) {
     guests.setCustomValidity('Для всех гостей не хватит комнат');
     return;
   } else if (+rooms.value === 100 && +guests.value !== 0) {
     guests.setCustomValidity('Эти апартаменты не для гостей');
     return;
+  } else if (+rooms.value !== 100 && +guests.value === 0) {
+    guests.setCustomValidity('Эти апартаменты для гостей');
+    return;
   }
   guests.setCustomValidity('');
 };
 
+var initFormValidation = function () {
+  guestRoomValidate();
+};
+
 var offers = createDataArray();
 
-toggleFormFieldsStatus(adForm, 'disable');
-toggleFormFieldsStatus(mapFilters, 'disable');
+toggleFormFieldsStatus(adForm);
+toggleFormFieldsStatus(mapFilters);
 getAddress();
 
 pinMain.addEventListener('mousedown', function (evt) {
@@ -191,6 +196,10 @@ pinMain.addEventListener('keydown', function (evt) {
   }
 });
 
-adForm.addEventListener('change', function () {
+guests.addEventListener('change', function () {
+  guestRoomValidate();
+});
+
+rooms.addEventListener('change', function () {
   guestRoomValidate();
 });
