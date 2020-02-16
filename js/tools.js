@@ -4,16 +4,16 @@
   var MOUSE_KEY = 0;
   var ENTER_KEY = 'Enter';
 
-  var addError = function(message) {
+  var addError = function (message) {
     var node = document.createElement('div');
     node.classList.add('error-element');
     node.textContent = message;
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  var removeError = function(errorClass) {
+  var removeError = function (errorClass) {
     var error = document.querySelector(errorClass);
-    if(error) {
+    if (error) {
       error.remove();
     }
   };
