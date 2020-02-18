@@ -5,8 +5,7 @@
   var pinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var mapFilters = map.querySelector('.map__filters');
-  var mapPinsArea = map.querySelector('.map__pins');
-  var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+
 
   var pageActivate = function () {
     map.classList.remove('map--faded');
@@ -14,7 +13,7 @@
     window.form.toggleFormFieldsStatus(adForm);
     window.form.toggleFormFieldsStatus(mapFilters);
     window.pin.getAddress('active');
-    window.map.fillTheMap(window.data.offers, pinTemplate, mapPinsArea);
+    window.backend.load(window.map.onActivation, window.tools.addError);
     window.form.initFormValidation();
   };
 

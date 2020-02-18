@@ -4,6 +4,20 @@
   var MOUSE_KEY = 0;
   var ENTER_KEY = 'Enter';
 
+  var addError = function (message) {
+    var node = document.createElement('div');
+    node.classList.add('error-element');
+    node.textContent = message;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  var removeError = function (errorClass) {
+    var error = document.querySelector(errorClass);
+    if (error) {
+      error.remove();
+    }
+  };
+
   var getRandomeInRange = function (min, max) {
     var num = Math.floor(Math.random() * (max - min + 1)) + min;
     return num;
@@ -29,7 +43,9 @@
     ENTER_KEY: ENTER_KEY,
     getRandomeInRange: getRandomeInRange,
     getRandomElement: getRandomElement,
-    getRandomArray: getRandomArray
+    getRandomArray: getRandomArray,
+    addError: addError,
+    removeError: removeError,
   };
 
 })();
