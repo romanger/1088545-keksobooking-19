@@ -2,12 +2,13 @@
 
 (function () {
 
-  var fillTheMap = function (arr, template, destination) {
+  var fillTheMap = function (arr, templet, destination, getElement) {
+
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < arr.length; i++) {
-      var pin = template.cloneNode(true);
-      pin = window.pin.addPin(arr[i], pin);
-      fragment.appendChild(pin);
+      var element = templet.cloneNode(true);
+      element = getElement(arr[i], element);
+      fragment.appendChild(element);
     }
     destination.appendChild(fragment);
   };
