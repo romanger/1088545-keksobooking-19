@@ -2,15 +2,22 @@
 
 (function () {
 
-  var fillTheMap = function (arr, templete, destination, getElement) {
-
+  var insertToMap = function (arr, templete, destination, getElement) {
     var fragment = document.createDocumentFragment();
+    window.tools.removeError('.error-element');
     for (var i = 0; i < arr.length; i++) {
       var element = templete.cloneNode(true);
       element = getElement(arr[i], element);
       fragment.appendChild(element);
     }
     destination.appendChild(fragment);
+  }
+
+  var insertPins = function (arr) {
+    var mapPinsArea = document.querySelector('.map__pins');
+    var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+
+    insertToMap(arr, pinTemplate, mapPinsArea, window.pin.addPin);
   };
 
   var insertCard = function (arr, templete, destination, getElement) {
@@ -26,7 +33,7 @@
   };
 
   window.map = {
-    fillTheMap: fillTheMap,
+    insertPins: insertPins,
     insertCard: insertCard
   };
 
