@@ -24,6 +24,7 @@
     window.pin.getAddress('active');
     window.map.fillTheMap(window.data.offers, pinTemplate, mapPinsArea, window.pin.addPin);
     window.map.fillTheMap(window.data.offers, cardTemplate, cardWrap, window.pin.addCard);
+    window.backend.load(window.map.onActivation, window.tools.addError);
     window.form.initFormValidation();
   };
 
