@@ -11,7 +11,7 @@
       fragment.appendChild(element);
     }
     destination.appendChild(fragment);
-  }
+  };
 
   var insertPins = function (arr) {
     var mapPinsArea = document.querySelector('.map__pins');
