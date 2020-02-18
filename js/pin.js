@@ -48,8 +48,6 @@
     var avatar = node.querySelector('.popup__avatar');
 
     title.textContent = obj.offer.title;
-
-
     address.textContent = obj.offer.address;
     price.textContent = obj.offer.price + '₽/ночь';
     capacity.textContent = obj.offer.rooms + ' комнаты для ' + obj.offer.guests + ' гостей';
@@ -64,42 +62,40 @@
       features.append(listElement);
     });
 
-    photos.innerHTML = "";
+    photos.innerHTML = '';
 
     obj.offer.photos.forEach(function (element) {
       var photo = document.createElement('img');
       photo.src = element;
       photo.alt = 'Фотография жилья';
       photo.width = '45';
-      photo.height = '40'
+      photo.height = '40';
 
       photos.append(photo);
     });
 
     description.textContent = obj.offer.description;
-
-
     avatar.src = obj.author.avatar;
 
     switch (obj.offer.type) {
       case 'palace':
-        type.textContent = 'Дворец'
+        type.textContent = 'Дворец';
         break;
       case 'house':
-        type.textContent = 'Дом'
+        type.textContent = 'Дом';
         break;
       case 'bungalo':
-        type.textContent = 'Бунгало'
+        type.textContent = 'Бунгало';
         break;
       case 'flat':
-        type.textContent = 'Квартира'
+        type.textContent = 'Квартира';
         break;
       default:
         break;
     }
 
     return node;
-  }
+  };
 
   getAddress();
 

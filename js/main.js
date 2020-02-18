@@ -14,7 +14,7 @@
   var cardWrap = document.createElement('div');
   cardWrap.classList.add('.cards-wrap');
 
-  map.insertBefore(cardWrap,filtersContainer);
+  map.insertBefore(cardWrap, filtersContainer);
 
   var pageActivate = function () {
     map.classList.remove('map--faded');
