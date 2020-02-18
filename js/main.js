@@ -6,15 +6,9 @@
   var adForm = document.querySelector('.ad-form');
   var mapFilters = map.querySelector('.map__filters');
   var mapPinsArea = map.querySelector('.map__pins');
-  var filtersContainer = map.querySelector('.map__filters-container');
 
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
-
-  var cardWrap = document.createElement('div');
-  cardWrap.classList.add('.cards-wrap');
-
-  map.insertBefore(cardWrap, filtersContainer);
 
   var pageActivate = function () {
     map.classList.remove('map--faded');
@@ -23,7 +17,7 @@
     window.form.toggleFormFieldsStatus(mapFilters);
     window.pin.getAddress('active');
     window.map.fillTheMap(window.data.offers, pinTemplate, mapPinsArea, window.pin.addPin);
-    window.map.fillTheMap(window.data.offers, cardTemplate, cardWrap, window.pin.addCard);
+    window.map.insertCard(window.data.offers, cardTemplate, map, window.pin.addCard);
     window.form.initFormValidation();
   };
 
