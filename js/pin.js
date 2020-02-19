@@ -97,12 +97,21 @@
     return node;
   };
 
+  var addPinClickListener = function (element, object) {
+    element.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      window.map.removeCard();
+      window.map.insertCard(object);
+    })
+  };
+
   getAddress();
 
   window.pin = {
     getAddress: getAddress,
     addPin: addPin,
     addCard: addCard,
+    addPinClickListener: addPinClickListener,
   };
 
 })();
