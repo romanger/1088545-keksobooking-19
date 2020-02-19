@@ -2,11 +2,11 @@
 
 (function () {
 
-  var insertToMap = function (arr, templete, destination, getElement) {
+  var insertToMap = function (arr, templаte, destination, getElement) {
     var fragment = document.createDocumentFragment();
     window.tools.removeError('.error-element');
     for (var i = 0; i < arr.length; i++) {
-      var element = templete.cloneNode(true);
+      var element = templаte.cloneNode(true);
       element = getElement(arr[i], element);
       fragment.appendChild(element);
     }
