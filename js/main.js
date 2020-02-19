@@ -5,7 +5,7 @@
   var pinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var mapFilters = map.querySelector('.map__filters');
-
+  var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
   var pageActivate = function () {
     map.classList.remove('map--faded');
@@ -13,20 +13,30 @@
     window.form.toggleFormFieldsStatus(adForm);
     window.form.toggleFormFieldsStatus(mapFilters);
     window.pin.getAddress('active');
-    window.backend.load(window.map.onActivation, window.tools.addError);
+    window.map.insertCard(window.data.offers, cardTemplate, map, window.pin.addCard);
+    window.backend.load(window.map.insertPins, window.tools.addError);
     window.form.initFormValidation();
   };
 
-  pinMain.addEventListener('mousedown', function (evt) {
+  var onPinClick = function (evt) {
     if (evt.button === window.tools.MOUSE_KEY) {
       pageActivate();
-    }
-  });
 
-  pinMain.addEventListener('keydown', function (evt) {
+      pinMain.removeEventListener('keydown', onPinEnter);
+      pinMain.removeEventListener('mousedown', onPinClick);
+    }
+  };
+
+  var onPinEnter = function (evt) {
     if (evt.key === window.tools.ENTER_KEY) {
       pageActivate();
+
+      pinMain.removeEventListener('keydown', onPinEnter);
+      pinMain.removeEventListener('mousedown', onPinClick);
     }
-  });
+  };
+
+  pinMain.addEventListener('mousedown', onPinClick);
+  pinMain.addEventListener('keydown', onPinEnter);
 
 })();

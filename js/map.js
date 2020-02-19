@@ -1,23 +1,40 @@
 'use strict';
 
 (function () {
-  var map = document.querySelector('.map');
-  var mapPinsArea = map.querySelector('.map__pins');
-  var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
-  var onActivation = function (arr) {
+  var insertToMap = function (arr, templаte, destination, getElement) {
     var fragment = document.createDocumentFragment();
     window.tools.removeError('.error-element');
     for (var i = 0; i < arr.length; i++) {
-      var pin = pinTemplate.cloneNode(true);
-      pin = window.pin.addPin(arr[i], pin);
-      fragment.appendChild(pin);
+      var element = templаte.cloneNode(true);
+      element = getElement(arr[i], element);
+      fragment.appendChild(element);
     }
-    mapPinsArea.appendChild(fragment);
+    destination.appendChild(fragment);
+  };
+
+  var insertPins = function (arr) {
+    var mapPinsArea = document.querySelector('.map__pins');
+    var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+
+    insertToMap(arr, pinTemplate, mapPinsArea, window.pin.addPin);
+  };
+
+  var insertCard = function (arr, template, destination, getElement) {
+
+    var fragment = document.createDocumentFragment();
+    var filtersContainer = document.querySelector('.map__filters-container');
+
+    var element = template.cloneNode(true);
+    element = getElement(arr[0], element);
+    fragment.appendChild(element);
+
+    destination.insertBefore(fragment, filtersContainer);
   };
 
   window.map = {
-    onActivation: onActivation,
+    insertPins: insertPins,
+    insertCard: insertCard
   };
 
 })();
