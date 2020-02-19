@@ -20,12 +20,12 @@
     insertToMap(arr, pinTemplate, mapPinsArea, window.pin.addPin);
   };
 
-  var insertCard = function (arr, templete, destination, getElement) {
+  var insertCard = function (arr, template, destination, getElement) {
 
     var fragment = document.createDocumentFragment();
     var filtersContainer = document.querySelector('.map__filters-container');
 
-    var element = templete.cloneNode(true);
+    var element = template.cloneNode(true);
     element = getElement(arr[0], element);
     fragment.appendChild(element);
 
