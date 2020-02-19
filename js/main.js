@@ -18,16 +18,25 @@
     window.form.initFormValidation();
   };
 
-  pinMain.addEventListener('mousedown', function (evt) {
+  var onPinClick = function (evt) {
     if (evt.button === window.tools.MOUSE_KEY) {
       pageActivate();
-    }
-  });
 
-  pinMain.addEventListener('keydown', function (evt) {
+      pinMain.removeEventListener('keydown', onPinEnter);
+      pinMain.removeEventListener('mousedown', onPinClick);
+    }
+  }
+
+  var onPinEnter = function (evt) {
     if (evt.key === window.tools.ENTER_KEY) {
       pageActivate();
+
+      pinMain.removeEventListener('keydown', onPinEnter);
+      pinMain.removeEventListener('mousedown', onPinClick);
     }
-  });
+  }
+
+  pinMain.addEventListener('mousedown', onPinClick);
+  pinMain.addEventListener('keydown', onPinEnter);
 
 })();
