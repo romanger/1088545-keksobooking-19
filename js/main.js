@@ -25,7 +25,7 @@
       pinMain.removeEventListener('keydown', onPinEnter);
       pinMain.removeEventListener('mousedown', onPinClick);
     }
-  }
+  };
 
   var onPinEnter = function (evt) {
     if (evt.key === window.tools.ENTER_KEY) {
@@ -34,7 +34,7 @@
       pinMain.removeEventListener('keydown', onPinEnter);
       pinMain.removeEventListener('mousedown', onPinClick);
     }
-  }
+  };
 
   pinMain.addEventListener('mousedown', onPinClick);
   pinMain.addEventListener('keydown', onPinEnter);
