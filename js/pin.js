@@ -93,16 +93,42 @@
       default:
         break;
     }
-
+    addCardClose(node);
     return node;
+  };
+
+  var openCard = function (object) {
+    window.map.removeCard();
+    window.map.insertCard(object);
   };
 
   var addPinClickListener = function (element, object) {
     element.addEventListener('click', function (evt) {
       evt.preventDefault();
+      openCard(object);
+    });
+  };
+
+  var addPinEnterListener = function (element, object) {
+    element.addEventListener('keydown', function (evt) {
+      if (evt.key === window.tools.ENTER_KEY) {
+        evt.preventDefault();
+        openCard(object);
+      }
+    });
+  };
+
+  var onCardEscPress = function (evt) {
+    if (evt.key === window.tools.ESC_KEY) {
       window.map.removeCard();
-      window.map.insertCard(object);
-    })
+      document.removeEventListener('keydown', onCardEscPress);
+    }
+  };
+
+  var addCardClose = function (card) {
+    var closeButton = card.querySelector('.popup__close');
+    closeButton.addEventListener('click', window.map.removeCard);
+    document.addEventListener('keydown', onCardEscPress);
   };
 
   getAddress();
@@ -112,6 +138,7 @@
     addPin: addPin,
     addCard: addCard,
     addPinClickListener: addPinClickListener,
+    addPinEnterListener: addPinEnterListener,
   };
 
 })();

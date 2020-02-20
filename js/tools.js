@@ -3,6 +3,7 @@
 (function () {
   var MOUSE_KEY = 0;
   var ENTER_KEY = 'Enter';
+  var ESC_KEY = 'Escape';
 
   var addError = function (message) {
     var node = document.createElement('div');
@@ -41,6 +42,7 @@
   window.tools = {
     MOUSE_KEY: MOUSE_KEY,
     ENTER_KEY: ENTER_KEY,
+    ESC_KEY: ESC_KEY,
     getRandomeInRange: getRandomeInRange,
     getRandomElement: getRandomElement,
     getRandomArray: getRandomArray,

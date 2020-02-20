@@ -5,6 +5,8 @@
   var mapFilters = document.querySelector('.map__filters');
   var guests = adForm.querySelector('#capacity');
   var rooms = adForm.querySelector('#room_number');
+  var title = adForm.querySelector('#title');
+
 
   var toggleFormFieldsStatus = function (form) {
     var elements = form.children;

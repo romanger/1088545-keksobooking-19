@@ -10,6 +10,7 @@
       element = getElement(arr[i], element);
 
       window.pin.addPinClickListener(element, arr[i]);
+      window.pin.addPinEnterListener(element, arr[i]);
       fragment.appendChild(element);
     }
     destination.appendChild(fragment);
@@ -27,7 +28,7 @@
     if (card) {
       card.remove();
     }
-  }
+  };
 
   var insertCard = function (object) {
     var map = document.querySelector('.map');
