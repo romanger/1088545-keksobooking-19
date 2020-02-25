@@ -21,33 +21,32 @@
     }
   };
 
-  var syncTime = function(firstInput, secondInput){
+  var syncTime = function (firstInput, secondInput) {
     firstInput.value = secondInput.value;
-  }
+  };
 
   var аpartmentsTypeValidate = function () {
     switch (type.value) {
       case 'bungalo':
-        price.setAttribute('min',0);
-        price.setAttribute('placeholder',0);
+        price.setAttribute('min', 0);
+        price.setAttribute('placeholder', 0);
         break;
       case 'flat':
-        price.setAttribute('min',1000);
-        price.setAttribute('placeholder',1000);
+        price.setAttribute('min', 1000);
+        price.setAttribute('placeholder', 1000);
         break;
       case 'house':
-        price.setAttribute('min',5000);
-        price.setAttribute('placeholder',5000);
-        break
+        price.setAttribute('min', 5000);
+        price.setAttribute('placeholder', 5000);
+        break;
       case 'palace':
-        price.setAttribute('min',10000);
-        price.setAttribute('placeholder',10000);
+        price.setAttribute('min', 10000);
+        price.setAttribute('placeholder', 10000);
         break;
       default:
         break;
     }
-
-  }
+  };
 
   var guestRoomValidate = function () {
     if (+rooms.value < +guests.value && +guests.value !== 0) {
@@ -68,7 +67,7 @@
     аpartmentsTypeValidate();
   };
 
-  type.addEventListener('change', function(){
+  type.addEventListener('change', function () {
     аpartmentsTypeValidate();
   });
 
@@ -80,11 +79,11 @@
     guestRoomValidate();
   });
 
-  timein.addEventListener('change', function(evt){
+  timein.addEventListener('change', function (evt) {
     syncTime(timeout, evt.target);
   });
 
-  timeout.addEventListener('change', function(evt){
+  timeout.addEventListener('change', function (evt) {
     syncTime(timein, evt.target);
   });
 
