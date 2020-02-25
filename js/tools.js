@@ -39,6 +39,7 @@
     return randomArray;
   };
 
+
   window.tools = {
     MOUSE_KEY: MOUSE_KEY,
     ENTER_KEY: ENTER_KEY,
