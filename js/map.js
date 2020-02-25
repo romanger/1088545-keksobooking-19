@@ -8,6 +8,9 @@
     for (var i = 0; i < arr.length; i++) {
       var element = templаte.cloneNode(true);
       element = getElement(arr[i], element);
+
+      window.pin.addPinClickListener(element, arr[i]);
+      window.pin.addPinEnterListener(element, arr[i]);
       fragment.appendChild(element);
     }
     destination.appendChild(fragment);
@@ -20,20 +23,29 @@
     insertToMap(arr, pinTemplate, mapPinsArea, window.pin.addPin);
   };
 
-  var insertCard = function (arr, template, destination, getElement) {
+  var removeCard = function () {
+    var card = document.querySelector('.map__card');
+    if (card) {
+      card.remove();
+    }
+  };
 
+  var insertCard = function (object) {
+    var map = document.querySelector('.map');
+    var template = document.querySelector('#card').content.querySelector('.map__card');
+    var filtersContainer = map.querySelector('.map__filters-container');
     var fragment = document.createDocumentFragment();
-    var filtersContainer = document.querySelector('.map__filters-container');
-
     var element = template.cloneNode(true);
-    element = getElement(arr[0], element);
+
+    element = window.pin.addCard(object, element);
     fragment.appendChild(element);
 
-    destination.insertBefore(fragment, filtersContainer);
+    map.insertBefore(fragment, filtersContainer);
   };
 
   window.map = {
     insertPins: insertPins,
+    removeCard: removeCard,
     insertCard: insertCard
   };
 
