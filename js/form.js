@@ -28,20 +28,20 @@
   var аpartmentsTypeValidate = function () {
     switch (type.value) {
       case 'bungalo':
-        price.setAttribute('min', 0);
-        price.setAttribute('placeholder', 0);
+        price.setAttribute('min', window.tools.BUNGALO_MIN_PRICE);
+        price.setAttribute('placeholder', window.tools.BUNGALO_MIN_PRICE);
         break;
       case 'flat':
-        price.setAttribute('min', 1000);
-        price.setAttribute('placeholder', 1000);
+        price.setAttribute('min', window.tools.FLAT_MIN_PRICE);
+        price.setAttribute('placeholder', window.tools.FLAT_MIN_PRICE);
         break;
       case 'house':
-        price.setAttribute('min', 5000);
-        price.setAttribute('placeholder', 5000);
+        price.setAttribute('min', window.tools.HOUSE_MIN_PRICE);
+        price.setAttribute('placeholder', window.tools.HOUSE_MIN_PRICE);
         break;
       case 'palace':
-        price.setAttribute('min', 10000);
-        price.setAttribute('placeholder', 10000);
+        price.setAttribute('min', window.tools.PALACE_MIN_PRICE);
+        price.setAttribute('placeholder', window.tools.PALACE_MIN_PRICE);
         break;
       default:
         break;
