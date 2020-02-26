@@ -3,6 +3,7 @@
 (function () {
   var MAIN_PIN_HEIGHT = 84;
   var TOP_MOVE_LIMIT = 130;
+  var LEFT_MOVE_LIMIT = 0;
   var BOTTOM_MOVE_LIMIT = 630;
   var PIN_PARAMS = {
     'width': 50,
@@ -12,7 +13,6 @@
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var pinMain = document.querySelector('.map__pin--main');
-  var limitLeft = 0;
   var limitRight = map.offsetWidth - pinMain.offsetWidth;
 
   var getAddress = function (status) {
@@ -88,7 +88,7 @@
         if (top >= TOP_MOVE_LIMIT && top <= BOTTOM_MOVE_LIMIT) {
           pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
         }
-        if (left >= limitLeft && left <= limitRight) {
+        if (left >= LEFT_MOVE_LIMIT && left <= limitRight) {
           pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
         }
       };

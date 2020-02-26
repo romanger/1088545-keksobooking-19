@@ -2,6 +2,50 @@
 
 (function () {
 
+  var showFeaturesList = function (obj, destination) {
+    destination.innerHTML = '';
+
+    obj.forEach(function (element) {
+      var listElement = document.createElement('li');
+      var elementClass = 'popup__feature--' + element;
+      listElement.classList.add('popup__feature', elementClass);
+      destination.append(listElement);
+    });
+  };
+
+  var showPhotoList = function (obj, destination) {
+    destination.innerHTML = '';
+
+    obj.forEach(function (element) {
+      var photo = document.createElement('img');
+      photo.src = element;
+      photo.alt = 'Фотография жилья';
+      photo.width = '45';
+      photo.height = '40';
+
+      destination.append(photo);
+    });
+  };
+
+  var apartmentTypeToText = function (type, destination) {
+    switch (type) {
+      case 'palace':
+        destination = 'Дворец';
+        break;
+      case 'house':
+        destination = 'Дом';
+        break;
+      case 'bungalo':
+        destination = 'Бунгало';
+        break;
+      case 'flat':
+        destination = 'Квартира';
+        break;
+      default:
+        break;
+    }
+  };
+
   var addCard = function (obj, node) {
 
     var title = node.querySelector('.popup__title');
@@ -21,46 +65,14 @@
     capacity.textContent = obj.offer.rooms + ' комнаты для ' + obj.offer.guests + ' гостей';
     time.textContent = 'Заезд после ' + obj.offer.checkin + ', выезд до ' + obj.offer.checkout;
 
-    features.innerHTML = '';
-
-    obj.offer.features.forEach(function (element) {
-      var listElement = document.createElement('li');
-      var elementClass = 'popup__feature--' + element;
-      listElement.classList.add('popup__feature', elementClass);
-      features.append(listElement);
-    });
-
-    photos.innerHTML = '';
-
-    obj.offer.photos.forEach(function (element) {
-      var photo = document.createElement('img');
-      photo.src = element;
-      photo.alt = 'Фотография жилья';
-      photo.width = '45';
-      photo.height = '40';
-
-      photos.append(photo);
-    });
+    showFeaturesList(obj.offer.features, features);
+    showPhotoList(obj.offer.photos, photos);
 
     description.textContent = obj.offer.description;
     avatar.src = obj.author.avatar;
 
-    switch (obj.offer.type) {
-      case 'palace':
-        type.textContent = 'Дворец';
-        break;
-      case 'house':
-        type.textContent = 'Дом';
-        break;
-      case 'bungalo':
-        type.textContent = 'Бунгало';
-        break;
-      case 'flat':
-        type.textContent = 'Квартира';
-        break;
-      default:
-        break;
-    }
+    apartmentTypeToText(obj.offer.type, type.textContent);
+
     addCardClose(node);
     return node;
   };

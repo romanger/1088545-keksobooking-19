@@ -2,10 +2,6 @@
 
 (function () {
   var MOUSE_KEY = 0;
-  var BUNGALO_MIN_PRICE = 0;
-  var FLAT_MIN_PRICE = 1000;
-  var HOUSE_MIN_PRICE = 5000;
-  var PALACE_MIN_PRICE = 10000;
   var ENTER_KEY = 'Enter';
   var ESC_KEY = 'Escape';
 
@@ -48,10 +44,6 @@
     MOUSE_KEY: MOUSE_KEY,
     ENTER_KEY: ENTER_KEY,
     ESC_KEY: ESC_KEY,
-    BUNGALO_MIN_PRICE: BUNGALO_MIN_PRICE,
-    FLAT_MIN_PRICE: FLAT_MIN_PRICE,
-    HOUSE_MIN_PRICE: HOUSE_MIN_PRICE,
-    PALACE_MIN_PRICE: PALACE_MIN_PRICE,
     getRandomeInRange: getRandomeInRange,
     getRandomElement: getRandomElement,
     getRandomArray: getRandomArray,
