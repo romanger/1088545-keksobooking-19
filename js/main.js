@@ -22,7 +22,7 @@
     window.form.toggleFormFieldsStatus(mapFilters);
     window.map.removePins(pins);
     window.pin.resetPinMainPosition();
-  }
+  };
 
   window.main = {
     pageActivate: pageActivate,

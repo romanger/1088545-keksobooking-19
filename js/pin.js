@@ -18,7 +18,7 @@
   var pinMainStartPosition = {
     top: pinMain.style.top,
     left: pinMain.style.left
-  }
+  };
 
   var getAddress = function (status) {
     var locationPinX = pinMain.offsetWidth / 2;
@@ -44,10 +44,10 @@
     return node;
   };
 
-  var resetPinMainPosition = function(){
+  var resetPinMainPosition = function () {
     pinMain.style.top = pinMainStartPosition.top;
     pinMain.style.left = pinMainStartPosition.left;
-  }
+  };
 
   var addPinClickListener = function (element, object) {
     element.addEventListener('click', function (evt) {

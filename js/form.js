@@ -159,7 +159,7 @@
     window.backend.send(new FormData(adForm), formSent, formSendError);
   });
 
-  reserButton.addEventListener('click', function(){
+  reserButton.addEventListener('click', function () {
     window.main.pageDeactivate();
   });
 

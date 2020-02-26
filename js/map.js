@@ -24,10 +24,10 @@
   };
 
   var removePins = function (arr) {
-    arr.forEach(function(element){
+    arr.forEach(function (element) {
       element.remove();
     });
-  }
+  };
 
   window.map = {
     insertPins: insertPins,
