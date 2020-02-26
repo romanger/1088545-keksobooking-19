@@ -27,23 +27,25 @@
     });
   };
 
-  var apartmentTypeToText = function (type, destination) {
+  var apartmentTypeToText = function (type) {
+    var text = '';
     switch (type) {
       case 'palace':
-        destination = 'Дворец';
+        text = 'Дворец';
         break;
       case 'house':
-        destination = 'Дом';
+        text = 'Дом';
         break;
       case 'bungalo':
-        destination = 'Бунгало';
+        text = 'Бунгало';
         break;
       case 'flat':
-        destination = 'Квартира';
+        text = 'Квартира';
         break;
       default:
         break;
     }
+    return text;
   };
 
   var addCard = function (obj, node) {
@@ -71,7 +73,7 @@
     description.textContent = obj.offer.description;
     avatar.src = obj.author.avatar;
 
-    apartmentTypeToText(obj.offer.type, type.textContent);
+    type.textContent = apartmentTypeToText(obj.offer.type);
 
     addCardClose(node);
     return node;
