@@ -23,30 +23,8 @@
     insertToMap(arr, pinTemplate, mapPinsArea, window.pin.addPin);
   };
 
-  var removeCard = function () {
-    var card = document.querySelector('.map__card');
-    if (card) {
-      card.remove();
-    }
-  };
-
-  var insertCard = function (object) {
-    var map = document.querySelector('.map');
-    var template = document.querySelector('#card').content.querySelector('.map__card');
-    var filtersContainer = map.querySelector('.map__filters-container');
-    var fragment = document.createDocumentFragment();
-    var element = template.cloneNode(true);
-
-    element = window.pin.addCard(object, element);
-    fragment.appendChild(element);
-
-    map.insertBefore(fragment, filtersContainer);
-  };
-
   window.map = {
-    insertPins: insertPins,
-    removeCard: removeCard,
-    insertCard: insertCard
+    insertPins: insertPins
   };
 
 })();

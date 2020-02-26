@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var adForm = document.querySelector('.ad-form');
   var mapFilters = document.querySelector('.map__filters');
   var guests = adForm.querySelector('#capacity');
@@ -9,6 +10,13 @@
   var price = adForm.querySelector('#price');
   var timein = adForm.querySelector('#timein');
   var timeout = adForm.querySelector('#timeout');
+
+  var minPricing = {
+    'bungalo': 0,
+    'flat': 1000,
+    'house': 5000,
+    'palace': 10000
+  };
 
   var toggleFormFieldsStatus = function (form) {
     var elements = form.children;
@@ -28,20 +36,20 @@
   var аpartmentsTypeValidate = function () {
     switch (type.value) {
       case 'bungalo':
-        price.setAttribute('min', 0);
-        price.setAttribute('placeholder', 0);
+        price.setAttribute('min', minPricing.bungalo);
+        price.setAttribute('placeholder', minPricing.bungalo);
         break;
       case 'flat':
-        price.setAttribute('min', 1000);
-        price.setAttribute('placeholder', 1000);
+        price.setAttribute('min', minPricing.flat);
+        price.setAttribute('placeholder', minPricing.flat);
         break;
       case 'house':
-        price.setAttribute('min', 5000);
-        price.setAttribute('placeholder', 5000);
+        price.setAttribute('min', minPricing.house);
+        price.setAttribute('placeholder', minPricing.house);
         break;
       case 'palace':
-        price.setAttribute('min', 10000);
-        price.setAttribute('placeholder', 10000);
+        price.setAttribute('min', minPricing.palace);
+        price.setAttribute('placeholder', minPricing.palace);
         break;
       default:
         break;
