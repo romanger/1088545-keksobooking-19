@@ -23,8 +23,15 @@
     insertToMap(arr, pinTemplate, mapPinsArea, window.pin.addPin);
   };
 
+  var removePins = function (arr) {
+    arr.forEach(function(element){
+      element.remove();
+    });
+  }
+
   window.map = {
-    insertPins: insertPins
+    insertPins: insertPins,
+    removePins: removePins
   };
 
 })();

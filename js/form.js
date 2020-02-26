@@ -2,6 +2,7 @@
 
 (function () {
 
+  var main = document.querySelector('main');
   var adForm = document.querySelector('.ad-form');
   var mapFilters = document.querySelector('.map__filters');
   var guests = adForm.querySelector('#capacity');
@@ -10,6 +11,7 @@
   var price = adForm.querySelector('#price');
   var timein = adForm.querySelector('#timein');
   var timeout = adForm.querySelector('#timeout');
+  var reserButton = adForm.querySelector('.ad-form__reset');
 
   var minPricing = {
     'bungalo': 0,
@@ -97,6 +99,69 @@
 
   toggleFormFieldsStatus(adForm);
   toggleFormFieldsStatus(mapFilters);
+
+  var onClickMessage = function (element) {
+    if (element.classList.contains('success') || element.classList.contains('error')) {
+      element.addEventListener('click', function (evt) {
+        evt.target.remove();
+      });
+    }
+  };
+
+  var onClickErrorMessageButton = function () {
+    var error = document.querySelector('.error');
+    var button = error.querySelector('.error__button');
+
+    button.addEventListener('click', function () {
+      error.remove();
+    });
+  };
+
+  var onErrorEscapePress = function (evt) {
+    if (evt.key === window.tools.ESC_KEY) {
+      var error = document.querySelector('.error');
+      error.remove();
+      document.removeEventListener('keydown', onErrorEscapePress);
+    }
+  };
+
+  var openSuccessMessage = function () {
+    var templаte = document.querySelector('#success').content.querySelector('.success');
+    var element = templаte.cloneNode(true);
+    main.appendChild(element);
+    onClickMessage(element);
+  };
+
+  var openErrorMessage = function (message) {
+    var templаte = document.querySelector('#error').content.querySelector('.error');
+    var element = templаte.cloneNode(true);
+    var errorText = element.querySelector('.error__message');
+
+    errorText.textContent = message;
+    main.appendChild(element);
+    onClickMessage(element);
+    onClickErrorMessageButton();
+    document.addEventListener('keydown', onErrorEscapePress);
+  };
+
+  var formSent = function () {
+    window.main.pageDeactivate();
+    adForm.reset();
+    openSuccessMessage();
+  };
+
+  var formSendError = function (response) {
+    openErrorMessage(response);
+  };
+
+  adForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.send(new FormData(adForm), formSent, formSendError);
+  });
+
+  reserButton.addEventListener('click', function(){
+    window.main.pageDeactivate();
+  });
 
   window.form = {
     toggleFormFieldsStatus: toggleFormFieldsStatus,

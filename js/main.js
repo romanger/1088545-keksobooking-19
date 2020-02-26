@@ -5,7 +5,6 @@
   var adForm = document.querySelector('.ad-form');
   var mapFilters = map.querySelector('.map__filters');
 
-
   var pageActivate = function () {
     adForm.classList.remove('ad-form--disabled');
     window.form.toggleFormFieldsStatus(adForm);
@@ -15,8 +14,19 @@
     window.form.initFormValidation();
   };
 
+  var pageDeactivate = function () {
+    var pins = map.querySelectorAll('.map__pin:not(.map__pin--main)');
+    map.classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+    window.form.toggleFormFieldsStatus(adForm);
+    window.form.toggleFormFieldsStatus(mapFilters);
+    window.map.removePins(pins);
+    window.pin.resetPinMainPosition();
+  }
+
   window.main = {
     pageActivate: pageActivate,
+    pageDeactivate: pageDeactivate
   };
 
 })();
