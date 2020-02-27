@@ -2,6 +2,13 @@
 
 (function () {
 
+  var apartmentTypeToTextMap = {
+    'palace': 'Дворец',
+    'house': 'Дом',
+    'bungalo': 'Бунгало',
+    'flat': 'Квартира'
+  }
+
   var showFeaturesList = function (obj, destination) {
     destination.innerHTML = '';
 
@@ -25,27 +32,6 @@
 
       destination.append(photo);
     });
-  };
-
-  var apartmentTypeToText = function (type) {
-    var text = '';
-    switch (type) {
-      case 'palace':
-        text = 'Дворец';
-        break;
-      case 'house':
-        text = 'Дом';
-        break;
-      case 'bungalo':
-        text = 'Бунгало';
-        break;
-      case 'flat':
-        text = 'Квартира';
-        break;
-      default:
-        break;
-    }
-    return text;
   };
 
   var addCard = function (obj, node) {
@@ -73,7 +59,7 @@
     description.textContent = obj.offer.description;
     avatar.src = obj.author.avatar;
 
-    type.textContent = apartmentTypeToText(obj.offer.type);
+    type.textContent = apartmentTypeToTextMap[obj.offer.type];
 
     addCardClose(node);
     return node;
@@ -121,6 +107,7 @@
     addCard: addCard,
     openCard: openCard,
     insertCard: insertCard,
+    removeCard: removeCard
   };
 
 })();

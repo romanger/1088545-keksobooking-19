@@ -13,7 +13,8 @@
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var pinMain = document.querySelector('.map__pin--main');
-  var limitRight = map.offsetWidth - pinMain.offsetWidth;
+  var pinLimitRight = map.offsetWidth - pinMain.offsetWidth / 2;
+  var pinLimitLeft = LEFT_MOVE_LIMIT - pinMain.offsetWidth / 2;
 
   var pinMainStartPosition = {
     top: pinMain.style.top,
@@ -98,7 +99,7 @@
         if (top >= TOP_MOVE_LIMIT && top <= BOTTOM_MOVE_LIMIT) {
           pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
         }
-        if (left >= LEFT_MOVE_LIMIT && left <= limitRight) {
+        if (left >= pinLimitLeft && left <= pinLimitRight) {
           pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
         }
       };

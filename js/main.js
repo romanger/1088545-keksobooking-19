@@ -16,6 +16,7 @@
 
   var pageDeactivate = function () {
     var pins = map.querySelectorAll('.map__pin:not(.map__pin--main)');
+    window.card.removeCard();
     map.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     window.form.toggleFormFieldsStatus(adForm);

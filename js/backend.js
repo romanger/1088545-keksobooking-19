@@ -34,7 +34,6 @@
 
   var load = function (onLoad, onError) {
     var xhr = request(onLoad, onError);
-    xhr.timeout = TIMEOUT_IN_MS;
     xhr.open('GET', DATA_URL);
     xhr.send();
   };
