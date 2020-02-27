@@ -15,6 +15,11 @@
   var pinMain = document.querySelector('.map__pin--main');
   var limitRight = map.offsetWidth - pinMain.offsetWidth;
 
+  var pinMainStartPosition = {
+    top: pinMain.style.top,
+    left: pinMain.style.left
+  };
+
   var getAddress = function (status) {
     var locationPinX = pinMain.offsetWidth / 2;
     var locationPinY = pinMain.offsetHeight / 2;
@@ -37,6 +42,11 @@
     node.style.top = (obj.location.y - PIN_PARAMS.height) + 'px';
 
     return node;
+  };
+
+  var resetPinMainPosition = function () {
+    pinMain.style.top = pinMainStartPosition.top;
+    pinMain.style.left = pinMainStartPosition.left;
   };
 
   var addPinClickListener = function (element, object) {
@@ -127,6 +137,7 @@
     addPin: addPin,
     addPinClickListener: addPinClickListener,
     addPinEnterListener: addPinEnterListener,
+    resetPinMainPosition: resetPinMainPosition
   };
 
 })();
