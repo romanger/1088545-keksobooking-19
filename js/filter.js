@@ -5,7 +5,7 @@
   var housingTypeSelect = mapFilter.querySelector('#housing-type');
 
   var housingTipeFilter = function (arr, type) {
-    if(type == 'any') {
+    if (type === 'any') {
       return arr;
     }
     var thisHousingTipeArray = arr.filter(function (it) {
