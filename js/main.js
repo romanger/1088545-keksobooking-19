@@ -2,6 +2,7 @@
 
 (function () {
   var map = document.querySelector('.map');
+  var mapFilters = map.querySelector('.map__filters');
   var adForm = document.querySelector('.ad-form');
 
 

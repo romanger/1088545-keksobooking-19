@@ -102,7 +102,7 @@
   var removeMessage = function (element, listener) {
     element.remove();
     document.removeEventListener('keydown', listener);
-  }
+  };
 
   var onErrorEscapePress = function (evt) {
     if (evt.key === window.tools.ESC_KEY) {

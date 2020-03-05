@@ -7,7 +7,7 @@
     'house': 'Дом',
     'bungalo': 'Бунгало',
     'flat': 'Квартира'
-  }
+  };
 
   var showFeaturesList = function (obj, destination) {
     destination.innerHTML = '';

@@ -8,7 +8,7 @@
 
     if (arr.length < amount) {
       amount = arr.length;
-    };
+    }
 
     window.tools.removeError('.error-element');
 

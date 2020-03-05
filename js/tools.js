@@ -6,8 +6,6 @@
   var ESC_KEY = 'Escape';
   var PINS_AMOUNT = 5;
 
-  //TODO Create error message for load pins
-
   var addError = function (message) {
     var node = document.createElement('div');
     node.classList.add('error-element');
