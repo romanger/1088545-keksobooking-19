@@ -5,6 +5,8 @@
   var SEND_URL = 'https://js.dump.academy/keksobooking';
   var TIMEOUT_IN_MS = 10000;
 
+  var mapFilters = document.querySelector('.map__filters');
+
   var StatusCode = {
     OK: 200
   };
@@ -15,7 +17,9 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
+        window.backend.data = xhr.response;
         onLoad(xhr.response);
+        window.form.toggleFormFieldsStatus(mapFilters);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
