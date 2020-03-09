@@ -31,6 +31,15 @@
     }
   };
 
+  var activateFormFields = function (form) {
+    var elements = form.children;
+    for (var i = 0; i < elements.length; i++) {
+      if ((elements[i].tagName === 'FIELDSET' || elements[i].tagName === 'SELECT') && elements[i].disabled === true) {
+        elements[i].disabled = false;
+      }
+    }
+  }
+
   var syncTime = function (firstInput, secondInput) {
     firstInput.value = secondInput.value;
   };
@@ -159,6 +168,7 @@
 
   window.form = {
     toggleFormFieldsStatus: toggleFormFieldsStatus,
+    activateFormFields: activateFormFields,
     initFormValidation: initFormValidation
   };
 
