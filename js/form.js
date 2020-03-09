@@ -22,7 +22,7 @@
   var reserButton = adForm.querySelector('.ad-form__reset');
   var avatarInput = adForm.querySelector('.ad-form__field input[type=file]');
   var avatarPreview = adForm.querySelector('.ad-form-header__preview');
-  var photoInput = adForm.querySelector('.ad-form__upload input[type=file]')
+  var photoInput = adForm.querySelector('.ad-form__upload input[type=file]');
   var photoPreview = adForm.querySelector('.ad-form__photo');
 
   var toggleFormFieldsStatus = function (form) {
@@ -78,8 +78,6 @@
     var fileName = file.name.toLowerCase();
     var inner = image.querySelector('img');
 
-    console.log(inner);
-
     var matches = FILE_TYPES.some(function (it) {
       return fileName.endsWith(it);
     });
@@ -91,14 +89,13 @@
         if (inner) {
           inner.src = reader.result;
         } else {
-          image.setAttribute("style", "background-image:url(" + reader.result + "); background-repeat: no-repeat; background-size: contain; background-position: center;");
+          image.setAttribute('style', 'background-image:url(' + reader.result + '); background-repeat: no-repeat; background-size: contain; background-position: center;');
         }
-
       });
 
       reader.readAsDataURL(file);
     }
-  }
+  };
 
   type.addEventListener('change', function () {
     аpartmentsTypeValidate();
