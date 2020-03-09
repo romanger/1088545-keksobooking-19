@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
   var аpartmentMinPriceMap = {
     'bungalo': 0,
@@ -19,6 +20,10 @@
   var timein = adForm.querySelector('#timein');
   var timeout = adForm.querySelector('#timeout');
   var reserButton = adForm.querySelector('.ad-form__reset');
+  var avatarInput = adForm.querySelector('.ad-form__field input[type=file]');
+  var avatarPreview = adForm.querySelector('.ad-form-header__preview');
+  var photoInput = adForm.querySelector('.ad-form__upload input[type=file]')
+  var photoPreview = adForm.querySelector('.ad-form__photo');
 
   var toggleFormFieldsStatus = function (form) {
     var elements = form.children;
@@ -67,6 +72,33 @@
     guestRoomValidate();
     аpartmentsTypeValidate();
   };
+
+  var imagePreview = function (input, image) {
+    var file = input.files[0];
+    var fileName = file.name.toLowerCase();
+    var inner = image.querySelector('img');
+
+    console.log(inner);
+
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        if (inner) {
+          inner.src = reader.result;
+        } else {
+          image.setAttribute("style", "background-image:url(" + reader.result + "); background-repeat: no-repeat; background-size: contain; background-position: center;");
+        }
+
+      });
+
+      reader.readAsDataURL(file);
+    }
+  }
 
   type.addEventListener('change', function () {
     аpartmentsTypeValidate();
@@ -156,6 +188,14 @@
   var formSendError = function (response) {
     openErrorMessage(response);
   };
+
+  avatarInput.addEventListener('change', function (evt) {
+    imagePreview(evt.target, avatarPreview);
+  });
+
+  photoInput.addEventListener('change', function (evt) {
+    imagePreview(evt.target, photoPreview);
+  });
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
