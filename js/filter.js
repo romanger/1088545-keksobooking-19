@@ -24,16 +24,12 @@
     switch (range) {
       case 'any':
         return true;
-        break;
       case 'middle':
         return price >= 10000 && price <= 50000;
-        break;
       case 'low':
         return price < 10000;
-        break;
       case 'high':
         return price > 50000;
-        break;
       default:
         return false;
     }
@@ -43,14 +39,14 @@
     var filtred = filterValues.reduce(function (accumulator, it, i, array) {
       var filtredPins = accumulator;
 
-      if (array[i] == 'any' || array[i] == []) {
+      if (array[i] === 'any' || array[i] === []) {
         return filtredPins;
       }
 
       switch (i) {
         case 0:
           filtredPins = filtredPins.filter(function (element) {
-            return element.offer.type === it
+            return element.offer.type === it;
           });
           break;
         case 1:
@@ -71,12 +67,12 @@
         case 4:
           filtredPins = filtredPins.filter(function (element) {
             var flag = true;
-            for (var i = 0; i < it.length; i++) {
-              flag = element.offer.features.includes(it[i]);
+            for (var j = 0; j < it.length; j++) {
+              flag = element.offer.features.includes(it[j]);
               if (!flag) {
                 break;
               }
-            };
+            }
             return flag;
           });
           break;

@@ -23,6 +23,7 @@
     window.form.toggleFormFieldsStatus(mapFilters);
     window.map.removePins(pins);
     window.pin.resetPinMainPosition();
+    mapFilters.reset();
   };
 
   window.main = {

@@ -38,7 +38,7 @@
         elements[i].disabled = false;
       }
     }
-  }
+  };
 
   var syncTime = function (firstInput, secondInput) {
     firstInput.value = secondInput.value;
