@@ -4,7 +4,7 @@
   var DATA_URL = 'https://js.dump.academy/keksobooking/data';
   var SEND_URL = 'https://js.dump.academy/keksobooking';
   var TIMEOUT_IN_MS = 10000;
-  var DATA = [];
+
 
   var mapFilters = document.querySelector('.map__filters');
 
@@ -18,7 +18,7 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
-        DATA = xhr.response;
+        window.backend.data = xhr.response;
         onLoad(xhr.response);
         window.form.activateFormFields(mapFilters);
       } else {
@@ -51,7 +51,6 @@
   };
 
   window.backend = {
-    DATA: DATA,
     load: load,
     send: send
   };

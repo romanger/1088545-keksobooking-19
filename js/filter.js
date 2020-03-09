@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var DEBOUNCE_INTERVAL = 500;
+
+  var timeOut;
   var mapFilter = document.querySelector('.map__filters');
   var mapFilterSelects = mapFilter.querySelectorAll('.map__filter');
 
@@ -95,7 +98,13 @@
   };
 
   mapFilter.addEventListener('change', function () {
-    window.backend.load(updateMapPins, window.tools.addError);
+    if (timeOut) {
+      window.clearTimeout(timeOut);
+    }
+    timeOut = window.setTimeout(function () {
+      updateMapPins(window.backend.data);
+    }, DEBOUNCE_INTERVAL);
+
   });
 
 })();
