@@ -2,6 +2,13 @@
 
 (function () {
 
+  var аpartmentMinPriceMap = {
+    'bungalo': 0,
+    'flat': 1000,
+    'house': 5000,
+    'palace': 10000
+  };
+
   var main = document.querySelector('main');
   var adForm = document.querySelector('.ad-form');
   var mapFilters = document.querySelector('.map__filters');
@@ -12,13 +19,6 @@
   var timein = adForm.querySelector('#timein');
   var timeout = adForm.querySelector('#timeout');
   var reserButton = adForm.querySelector('.ad-form__reset');
-
-  var minPricing = {
-    'bungalo': 0,
-    'flat': 1000,
-    'house': 5000,
-    'palace': 10000
-  };
 
   var toggleFormFieldsStatus = function (form) {
     var elements = form.children;
@@ -31,31 +31,22 @@
     }
   };
 
+  var enableFormFieldsStatus = function (form) {
+    var elements = form.children;
+    for (var i = 0; i < elements.length; i++) {
+      if ((elements[i].tagName === 'FIELDSET' || elements[i].tagName === 'SELECT') && elements[i].disabled === true) {
+        elements[i].disabled = false;
+      }
+    }
+  };
+
   var syncTime = function (firstInput, secondInput) {
     firstInput.value = secondInput.value;
   };
 
   var аpartmentsTypeValidate = function () {
-    switch (type.value) {
-      case 'bungalo':
-        price.setAttribute('min', minPricing.bungalo);
-        price.setAttribute('placeholder', minPricing.bungalo);
-        break;
-      case 'flat':
-        price.setAttribute('min', minPricing.flat);
-        price.setAttribute('placeholder', minPricing.flat);
-        break;
-      case 'house':
-        price.setAttribute('min', minPricing.house);
-        price.setAttribute('placeholder', minPricing.house);
-        break;
-      case 'palace':
-        price.setAttribute('min', minPricing.palace);
-        price.setAttribute('placeholder', minPricing.palace);
-        break;
-      default:
-        break;
-    }
+    price.setAttribute('min', аpartmentMinPriceMap[type.value]);
+    price.setAttribute('placeholder', аpartmentMinPriceMap[type.value]);
   };
 
   var guestRoomValidate = function () {
@@ -117,11 +108,22 @@
     });
   };
 
+  var removeMessage = function (element, listener) {
+    element.remove();
+    document.removeEventListener('keydown', listener);
+  };
+
   var onErrorEscapePress = function (evt) {
     if (evt.key === window.tools.ESC_KEY) {
       var error = document.querySelector('.error');
-      error.remove();
-      document.removeEventListener('keydown', onErrorEscapePress);
+      removeMessage(error, onErrorEscapePress);
+    }
+  };
+
+  var onSuccessEscapePress = function (evt) {
+    if (evt.key === window.tools.ESC_KEY) {
+      var success = document.querySelector('.success');
+      removeMessage(success, onSuccessEscapePress);
     }
   };
 
@@ -130,6 +132,7 @@
     var element = templаte.cloneNode(true);
     main.appendChild(element);
     onClickMessage(element);
+    document.addEventListener('keydown', onSuccessEscapePress);
   };
 
   var openErrorMessage = function (message) {
@@ -165,6 +168,7 @@
 
   window.form = {
     toggleFormFieldsStatus: toggleFormFieldsStatus,
+    enableFormFieldsStatus: enableFormFieldsStatus,
     initFormValidation: initFormValidation
   };
 
