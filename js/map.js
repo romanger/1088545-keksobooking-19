@@ -4,28 +4,27 @@
   var PINS_AMOUNT = 5;
   var mapFilters = document.querySelector('.map__filters');
 
-  var insertToMap = function (arr, templаte, destination, getElement) {
-
+  var insertToMap = function (arr) {
+    var mapPinsArea = document.querySelector('.map__pins');
+    var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
     var fragment = document.createDocumentFragment();
 
     window.tools.removeError('.error-element');
 
     for (var i = 0; i < arr.length; i++) {
-      var element = templаte.cloneNode(true);
-      element = getElement(arr[i], element);
+      var element = pinTemplate.cloneNode(true);
+      element = window.pin.addPin(arr[i], element);
 
       window.pin.addPinClickListener(element, arr[i]);
       window.pin.addPinEnterListener(element, arr[i]);
       fragment.appendChild(element);
     }
-    destination.appendChild(fragment);
+    mapPinsArea.appendChild(fragment);
   };
 
   var insertPins = function (arr) {
-    var mapPinsArea = document.querySelector('.map__pins');
-    var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
     var maxElementsAmount = arr.slice(0, PINS_AMOUNT);
-    insertToMap(maxElementsAmount, pinTemplate, mapPinsArea, window.pin.addPin);
+    insertToMap(maxElementsAmount);
     window.form.enableFormFieldsStatus(mapFilters);
   };
 
