@@ -16,10 +16,10 @@
   };
 
   var updateMapPins = function (arr, filterValue) {
-    var filtredPins = housingTypeFilter(arr, filterValue);
+    var filteredPins = housingTypeFilter(arr, filterValue);
     window.card.removeCard();
     window.map.removePins();
-    window.map.insertPins(filtredPins);
+    window.map.insertPins(filteredPins);
   };
 
   housingTypeSelect.addEventListener('change', function (evt) {

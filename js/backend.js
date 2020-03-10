@@ -41,7 +41,6 @@
 
   var send = function (data, onLoad, onError) {
     var xhr = request(onLoad, onError);
-
     xhr.open('POST', SEND_URL);
     xhr.send(data);
   };
