@@ -24,8 +24,8 @@
   var insertPins = function (arr) {
     var mapPinsArea = document.querySelector('.map__pins');
     var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-    var maxFive = arr.slice(0, PINS_AMOUNT);
-    insertToMap(maxFive, pinTemplate, mapPinsArea, window.pin.addPin);
+    var maxElementsAmount = arr.slice(0, PINS_AMOUNT);
+    insertToMap(maxElementsAmount, pinTemplate, mapPinsArea, window.pin.addPin);
     window.form.enableFormFieldsStatus(mapFilters);
   };
 
