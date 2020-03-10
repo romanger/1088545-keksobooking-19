@@ -4,7 +4,7 @@
   var MOUSE_KEY = 0;
   var ENTER_KEY = 'Enter';
   var ESC_KEY = 'Escape';
-  var PINS_AMOUNT = 5;
+
 
   var addError = function (message) {
     var node = document.createElement('div');
@@ -24,7 +24,6 @@
     MOUSE_KEY: MOUSE_KEY,
     ENTER_KEY: ENTER_KEY,
     ESC_KEY: ESC_KEY,
-    PINS_AMOUNT: PINS_AMOUNT,
     addError: addError,
     removeError: removeError,
   };

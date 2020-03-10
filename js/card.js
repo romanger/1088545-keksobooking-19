@@ -2,7 +2,7 @@
 
 (function () {
 
-  var apartmentTypeToTextMap = {
+  var apartmentTypes = {
     'palace': 'Дворец',
     'house': 'Дом',
     'bungalo': 'Бунгало',
@@ -59,7 +59,7 @@
     description.textContent = obj.offer.description;
     avatar.src = obj.author.avatar;
 
-    type.textContent = apartmentTypeToTextMap[obj.offer.type];
+    type.textContent = apartmentTypes[obj.offer.type];
 
     addCardClose(node);
     return node;
