@@ -27,6 +27,7 @@
     var mapPinsArea = document.querySelector('.map__pins');
     var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
     insertToMap(arr, pinTemplate, mapPinsArea, window.pin.addPin);
+    window.form.activateFormFields(mapFilters);
   };
 
   var removePins = function (arr) {

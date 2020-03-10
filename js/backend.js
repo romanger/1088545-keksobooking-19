@@ -20,7 +20,6 @@
       if (xhr.status === StatusCode.OK) {
         window.backend.data = xhr.response;
         onLoad(xhr.response);
-        window.form.activateFormFields(mapFilters);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
