@@ -1,6 +1,12 @@
 'use strict';
 
 (function () {
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+  var PreviewDimensions = {
+    WIDTH: 70,
+    HEIGHT: 70
+  };
 
   var аpartmentMinPriceMap = {
     'bungalo': 0,
@@ -19,6 +25,10 @@
   var timein = adForm.querySelector('#timein');
   var timeout = adForm.querySelector('#timeout');
   var reserButton = adForm.querySelector('.ad-form__reset');
+  var avatarInput = adForm.querySelector('.ad-form__field input[type=file]');
+  var avatarPreview = adForm.querySelector('.ad-form-header__preview img');
+  var photoInput = adForm.querySelector('.ad-form__upload input[type=file]');
+  var photoPreview = adForm.querySelector('.ad-form__photo');
 
   var toggleFormFieldsStatus = function (form) {
     var elements = form.children;
@@ -43,6 +53,34 @@
   var syncTime = function (firstInput, secondInput) {
     firstInput.value = secondInput.value;
   };
+
+  var showPreviewImage = function (input) {
+    var file = input.files[0];
+    var fileName = file.name.toLowerCase();
+
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        if (input === avatarInput) {
+          avatarPreview.src = reader.result;
+        } else if (input === photoInput) {
+          var photoImage = document.createElement('img');
+          photoImage.src = reader.result;
+          photoImage.width = PreviewDimensions.WIDTH;
+          photoImage.height = PreviewDimensions.HEIGHT;
+          photoPreview.appendChild(photoImage);
+        }
+      });
+
+      reader.readAsDataURL(file);
+    }
+  };
+
 
   var аpartmentsTypeValidate = function () {
     price.setAttribute('min', аpartmentMinPriceMap[type.value]);
@@ -156,6 +194,14 @@
   var formSendError = function (response) {
     openErrorMessage(response);
   };
+
+  avatarInput.addEventListener('change', function (evt) {
+    showPreviewImage(evt.target);
+  });
+
+  photoInput.addEventListener('change', function (evt) {
+    showPreviewImage(evt.target);
+  });
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
