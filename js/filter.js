@@ -6,7 +6,7 @@
   var priceRangeMap = {
     'top': 50000,
     'bottom': 10000
-  }
+  };
 
   var timeOut;
   var mapFilter = document.querySelector('.map__filters');
