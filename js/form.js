@@ -3,6 +3,11 @@
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
+  var PreviewDimensions = {
+    WIDTH: 70,
+    HEIGHT: 70
+  };
+
   var аpartmentMinPriceMap = {
     'bungalo': 0,
     'flat': 1000,
@@ -21,7 +26,7 @@
   var timeout = adForm.querySelector('#timeout');
   var reserButton = adForm.querySelector('.ad-form__reset');
   var avatarInput = adForm.querySelector('.ad-form__field input[type=file]');
-  var avatarPreview = adForm.querySelector('.ad-form-header__preview');
+  var avatarPreview = adForm.querySelector('.ad-form-header__preview img');
   var photoInput = adForm.querySelector('.ad-form__upload input[type=file]');
   var photoPreview = adForm.querySelector('.ad-form__photo');
 
@@ -49,10 +54,9 @@
     firstInput.value = secondInput.value;
   };
 
-  var imagePreview = function (input, image) {
+  var showPreviewImage = function (input) {
     var file = input.files[0];
     var fileName = file.name.toLowerCase();
-    var inner = image.querySelector('img');
 
     var matches = FILE_TYPES.some(function (it) {
       return fileName.endsWith(it);
@@ -62,10 +66,14 @@
       var reader = new FileReader();
 
       reader.addEventListener('load', function () {
-        if (inner) {
-          inner.src = reader.result;
-        } else {
-          image.setAttribute('style', 'background-image:url(' + reader.result + '); background-repeat: no-repeat; background-size: contain; background-position: center;');
+        if (input === avatarInput) {
+          avatarPreview.src = reader.result;
+        } else if (input === photoInput) {
+          var photoImage = document.createElement('img');
+          photoImage.src = reader.result;
+          photoImage.width = PreviewDimensions.WIDTH;
+          photoImage.height = PreviewDimensions.HEIGHT;
+          photoPreview.appendChild(photoImage);
         }
       });
 
@@ -188,11 +196,11 @@
   };
 
   avatarInput.addEventListener('change', function (evt) {
-    imagePreview(evt.target, avatarPreview);
+    showPreviewImage(evt.target);
   });
 
   photoInput.addEventListener('change', function (evt) {
-    imagePreview(evt.target, photoPreview);
+    showPreviewImage(evt.target);
   });
 
   adForm.addEventListener('submit', function (evt) {
