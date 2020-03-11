@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
   var аpartmentMinPriceMap = {
     'bungalo': 0,
