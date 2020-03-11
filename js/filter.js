@@ -1,17 +1,14 @@
 'use strict';
 
 (function () {
-  var DEBOUNCE_INTERVAL = 500;
 
   var priceRangeMap = {
     'top': 50000,
     'bottom': 10000
   };
 
-  var timeOut;
   var mapFilter = document.querySelector('.map__filters');
   var mapFilterSelects = mapFilter.querySelectorAll('.map__filter');
-
 
   var collectFilterParams = function () {
     var mapFeatures = mapFilter.querySelectorAll('.map__checkbox:checked');
@@ -25,7 +22,7 @@
     return filterArray;
   };
 
-  var inRange = function (range, price) {
+  var checkIfInRange = function (range, price) {
     switch (range) {
       case 'any':
         return true;
@@ -40,8 +37,8 @@
     }
   };
 
-  var pinsFilter = function (pins, filterValues) {
-    var filtred = filterValues.reduce(function (accumulator, it, i, array) {
+  var filterPins = function (pins, filterValues) {
+    var filtered = filterValues.reduce(function (accumulator, it, i, array) {
       var filteredPins = accumulator;
 
       if (array[i] === 'any' || array[i] === []) {
@@ -56,7 +53,7 @@
           break;
         case 1:
           filteredPins = filteredPins.filter(function (element) {
-            return inRange(it, element.offer.price);
+            return checkIfInRange(it, element.offer.price);
           });
           break;
         case 2:
@@ -86,26 +83,19 @@
       }
       return filteredPins;
     }, pins);
-    return filtred;
+    return filtered;
   };
 
   var updateMapPins = function (arr) {
-    var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     var filterParams = collectFilterParams();
-    var filteredPins = pinsFilter(arr, filterParams);
+    var filteredPins = filterPins(arr, filterParams);
     window.card.removeCard();
-    window.map.removePins(pins);
+    window.map.removePins();
     window.map.insertPins(filteredPins);
   };
 
   mapFilter.addEventListener('change', function () {
-    if (timeOut) {
-      window.clearTimeout(timeOut);
-    }
-    timeOut = window.setTimeout(function () {
-      updateMapPins(window.backend.data);
-    }, DEBOUNCE_INTERVAL);
-
+    window.tools.debounce(updateMapPins, window.backend.data);
   });
 
 })();
