@@ -2,9 +2,9 @@
 
 (function () {
 
-  var priceRangeMap = {
-    'top': 50000,
-    'bottom': 10000
+  var PriceRange = {
+    TOP: 50000,
+    BOTTOM: 10000
   };
 
   var mapFilter = document.querySelector('.map__filters');
@@ -27,11 +27,11 @@
       case 'any':
         return true;
       case 'middle':
-        return price >= priceRangeMap.bottom && price <= priceRangeMap.top;
+        return price >= PriceRange.BOTTOM && price <= PriceRange.TOP;
       case 'low':
-        return price < priceRangeMap.bottom;
+        return price < PriceRange.BOTTOM;
       case 'high':
-        return price > priceRangeMap.top;
+        return price > PriceRange.TOP;
       default:
         return false;
     }
@@ -89,7 +89,7 @@
   var updateMapPins = function (arr) {
     var filterParams = collectFilterParams();
     var filteredPins = filterPins(arr, filterParams);
-    window.card.removeCard();
+    window.card.remove();
     window.map.removePins();
     window.map.insertPins(filteredPins);
   };

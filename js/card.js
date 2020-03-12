@@ -2,7 +2,7 @@
 
 (function () {
 
-  var apartmentTypes = {
+  var apartmentTypesMap = {
     'palace': 'Дворец',
     'house': 'Дом',
     'bungalo': 'Бунгало',
@@ -59,7 +59,7 @@
     description.textContent = obj.offer.description;
     avatar.src = obj.author.avatar;
 
-    type.textContent = apartmentTypes[obj.offer.type];
+    type.textContent = apartmentTypesMap[obj.offer.type];
 
     addCardClose(node);
     return node;
@@ -104,10 +104,10 @@
   };
 
   window.card = {
-    addCard: addCard,
-    openCard: openCard,
-    insertCard: insertCard,
-    removeCard: removeCard
+    add: addCard,
+    open: openCard,
+    insert: insertCard,
+    remove: removeCard
   };
 
 })();

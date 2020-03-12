@@ -15,7 +15,7 @@
   };
 
   var pageDeactivate = function () {
-    window.card.removeCard();
+    window.card.remove();
     map.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     window.form.toggleFormFieldsStatus(adForm);

@@ -5,9 +5,10 @@
   var TOP_MOVE_LIMIT = 130;
   var LEFT_MOVE_LIMIT = 0;
   var BOTTOM_MOVE_LIMIT = 630;
-  var PIN_PARAMS = {
-    'width': 50,
-    'height': 70
+
+  var PinParameter = {
+    WIDTH: 50,
+    HEIGHT: 70
   };
 
   var map = document.querySelector('.map');
@@ -39,8 +40,8 @@
     img.src = obj.author.avatar;
     img.alt = obj.offer.title;
 
-    node.style.left = (obj.location.x - PIN_PARAMS.width / 2) + 'px';
-    node.style.top = (obj.location.y - PIN_PARAMS.height) + 'px';
+    node.style.left = (obj.location.x - PinParameter.WIDTH / 2) + 'px';
+    node.style.top = (obj.location.y - PinParameter.HEIGHT) + 'px';
 
     return node;
   };
@@ -53,7 +54,7 @@
   var addPinClickListener = function (element, object) {
     element.addEventListener('click', function (evt) {
       evt.preventDefault();
-      window.card.openCard(object);
+      window.card.open(object);
     });
   };
 
@@ -61,7 +62,7 @@
     element.addEventListener('keydown', function (evt) {
       if (evt.key === window.tools.ENTER_KEY) {
         evt.preventDefault();
-        window.card.openCard(object);
+        window.card.open(object);
       }
     });
   };

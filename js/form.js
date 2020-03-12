@@ -3,7 +3,7 @@
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-  var PreviewDimensions = {
+  var PreviewDimension = {
     WIDTH: 70,
     HEIGHT: 70
   };
@@ -33,11 +33,7 @@
   var toggleFormFieldsStatus = function (form) {
     var elements = form.children;
     for (var i = 0; i < elements.length; i++) {
-      if ((elements[i].tagName === 'FIELDSET' || elements[i].tagName === 'SELECT') && elements[i].disabled === false) {
-        elements[i].disabled = true;
-      } else {
-        elements[i].disabled = false;
-      }
+      elements[i].disabled = (elements[i].tagName === 'FIELDSET' || elements[i].tagName === 'SELECT') && elements[i].disabled === false;
     }
   };
 
@@ -71,8 +67,8 @@
         } else if (input === photoInput) {
           var photoImage = document.createElement('img');
           photoImage.src = reader.result;
-          photoImage.width = PreviewDimensions.WIDTH;
-          photoImage.height = PreviewDimensions.HEIGHT;
+          photoImage.width = PreviewDimension.WIDTH;
+          photoImage.height = PreviewDimension.HEIGHT;
           photoPreview.appendChild(photoImage);
         }
       });
